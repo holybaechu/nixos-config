@@ -41,6 +41,10 @@ in {
                             cmp-buffer
                             cmp-path
                         ];
+
+                        discord = [
+                            cord-nvim
+                        ];
                     };
                 };
 

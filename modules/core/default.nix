@@ -15,6 +15,7 @@
     ./user.nix
     ./gaming.nix
     ./virt-manager.nix
+    ./discord.nix
   ];
 }
 

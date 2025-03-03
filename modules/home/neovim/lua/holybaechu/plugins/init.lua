@@ -3,5 +3,6 @@ require("lze").load({
     { import = "holybaechu.plugins.colors" },
     { import = "holybaechu.plugins.lsp" },
     { import = "holybaechu.plugins.completion" },
-    { import = "holybaechu.plugins.treesitter" }
+    { import = "holybaechu.plugins.treesitter" },
+    { import = "holybaechu.plugins.discord" },
 })

@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }: let
+{ inputs, ... }: let
   utils = inputs.nixCats.utils;
 in {
   imports = [
@@ -16,12 +16,34 @@ in {
 
       luaPath = "${./.}";
 
-      categoryDefinitions.replace = ({ ... }: {
+      categoryDefinitions.replace = ({ pkgs, settings, categories, extra, name, mkNvimPlugin, ... }@packageDef: {
         startupPlugins = {
           general = with pkgs.vimPlugins; [
-            lz-n
+            lze
+            lzextras
             cyberdream-nvim
           ];
+        };
+
+        optionalPlugins = {
+            general = with pkgs.vimPlugins; {
+                always = [
+                    nvim-lspconfig
+                ];
+
+                cmp = [
+                    nvim-cmp
+                    cmp-nvim-lsp
+                    cmp-buffer
+                    cmp-path
+                ];
+            };
+        };
+
+        lspsAndRuntimeDeps = with pkgs; {
+            general = [
+                lua-language-server
+            ];
         };
       });
 

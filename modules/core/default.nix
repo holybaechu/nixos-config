@@ -13,7 +13,8 @@
     ./pipewire.nix
     ./sddm.nix
     ./user.nix
-    ./steam.nix
+    ./gaming.nix
+    ./virt-manager.nix
   ];
 }
 

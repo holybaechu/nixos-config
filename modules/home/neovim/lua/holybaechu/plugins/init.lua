@@ -5,4 +5,5 @@ require("lze").load({
     { import = "holybaechu.plugins.completion" },
     { import = "holybaechu.plugins.treesitter" },
     { import = "holybaechu.plugins.discord" },
+    { import = "holybaechu.plugins.codeium" },
 })

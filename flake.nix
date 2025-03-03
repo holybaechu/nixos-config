@@ -19,7 +19,9 @@
             inputs.nixpkgs.follows = "nixpkgs";
         };
 
+        # Neovim
         nixCats.url = "github:BirdeeHub/nixCats-nvim";
+        codeium.url = "github:Exafunction/codeium.nvim";
     };
 
     outputs =

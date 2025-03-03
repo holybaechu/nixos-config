@@ -11,6 +11,9 @@ in {
             nixpkgs_version = inputs.nixpkgs;
             addOverlays = [
                 (utils.standardPluginOverlay inputs)
+                (utils.fixSystemizedOverlay inputs.codeium.overlays
+                    (system: inputs.codeium.overlays.${system}.default)
+                )
             ];
             packageNames = [ "myCat" ];
 
@@ -21,6 +24,7 @@ in {
                     general = [
                         lze
                         lzextras
+                        plenary-nvim
                         cyberdream-nvim
                     ];
 
@@ -40,6 +44,7 @@ in {
                             cmp-nvim-lsp
                             cmp-buffer
                             cmp-path
+                            codeium-nvim
                         ];
 
                         discord = [
@@ -64,6 +69,9 @@ in {
                     categories = {
                         general = true;
                         treesitter = true;
+                    };
+                    extra = {
+                        codeium_lsp = "${inputs.codeium.packages.${pkgs.system}.codeium-lsp}/bin/codeium-lsp";
                     };
                 };
             };

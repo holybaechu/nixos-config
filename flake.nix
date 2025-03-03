@@ -19,6 +19,8 @@
             inputs.nixpkgs.follows = "nixpkgs";
         };
 
+        zen-browser.url = "github:0xc000022070/zen-browser-flake";
+
         # Neovim
         nixCats.url = "github:BirdeeHub/nixCats-nvim";
         codeium.url = "github:Exafunction/codeium.nvim";

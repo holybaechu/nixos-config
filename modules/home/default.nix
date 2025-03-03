@@ -1,8 +1,9 @@
 { ... }: {
-  imports = [
-    ./firefox.nix
-    ./git.nix
-    ./obs-studio.nix
-    ./neovim
-  ];
+    imports = [
+        ./git.nix
+        ./obs-studio.nix
+        ./neovim
+        ./zen-browser.nix
+        ./brave.nix
+    ];
 }

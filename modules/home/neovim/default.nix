@@ -1,64 +1,68 @@
 { inputs, ... }: let
-  utils = inputs.nixCats.utils;
+    utils = inputs.nixCats.utils;
 in {
-  imports = [
-    inputs.nixCats.homeModule
-  ];
+    imports = [
+        inputs.nixCats.homeModule
+    ];
 
-  config = {
-    nixCats = {
-      enable = true;
-      nixpkgs_version = inputs.nixpkgs;
-      addOverlays = [
-        (utils.standardPluginOverlay inputs)
-      ];
-      packageNames = [ "myCat" ];
+    config = {
+        nixCats = {
+            enable = true;
+            nixpkgs_version = inputs.nixpkgs;
+            addOverlays = [
+                (utils.standardPluginOverlay inputs)
+            ];
+            packageNames = [ "myCat" ];
 
-      luaPath = "${./.}";
+            luaPath = "${./.}";
 
-      categoryDefinitions.replace = ({ pkgs, settings, categories, extra, name, mkNvimPlugin, ... }@packageDef: {
-        startupPlugins = {
-          general = with pkgs.vimPlugins; [
-            lze
-            lzextras
-            cyberdream-nvim
-          ];
-        };
+            categoryDefinitions.replace = ({ pkgs, settings, categories, extra, name, mkNvimPlugin, ... }@packageDef: {
+                startupPlugins = with pkgs.vimPlugins; {
+                    general = [
+                        lze
+                        lzextras
+                        cyberdream-nvim
+                    ];
 
-        optionalPlugins = {
-            general = with pkgs.vimPlugins; {
-                always = [
-                    nvim-lspconfig
-                ];
+                    treesitter = [
+                        nvim-treesitter.withAllGrammars
+                    ];
+                };
 
-                cmp = [
-                    nvim-cmp
-                    cmp-nvim-lsp
-                    cmp-buffer
-                    cmp-path
-                ];
+                optionalPlugins = {
+                    general = with pkgs.vimPlugins; {
+                        always = [
+                            nvim-lspconfig
+                        ];
+
+                        cmp = [
+                            nvim-cmp
+                            cmp-nvim-lsp
+                            cmp-buffer
+                            cmp-path
+                        ];
+                    };
+                };
+
+                lspsAndRuntimeDeps = with pkgs; {
+                    general = [
+                        lua-language-server
+                    ];
+                };
+            });
+
+            packageDefinitions.replace = {
+                myCat = {pkgs , ... }: {
+                    settings = {
+                        wrapRc = true;
+                        aliases = [ "vi" "vim" "nvim" ];
+                    };
+                    categories = {
+                        general = true;
+                        treesitter = true;
+                    };
+                };
             };
         };
-
-        lspsAndRuntimeDeps = with pkgs; {
-            general = [
-                lua-language-server
-            ];
-        };
-      });
-
-      packageDefinitions.replace = {
-        myCat = {pkgs , ... }: {
-          settings = {
-            wrapRc = true;
-            aliases = [ "vi" "vim" "nvim" ];
-          };
-          categories = {
-            general = true;
-          };
-        };
-      };
     };
-  };
-
 }

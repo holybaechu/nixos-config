@@ -5,5 +5,6 @@
         ./neovim
         ./zen-browser.nix
         ./brave.nix
+        ./hyprland.nix
     ];
 }
